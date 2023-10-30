@@ -1,55 +1,94 @@
-let name1, name2
-let count = 0
-
-while (true) {
-    name1 = prompt("Name Player 1")
-    name2 = prompt("Name Player 2")
-
-    if (name1 && name2 && name1 !== name2) break
-}
-
+let gameOver
+let filledBoxs
+let currentPlayer
+let game = [[], [], []]
 
 const player1 = {
-    name: name1,
-    symbol: "X"
+    name: "",
+    symbol: "❌",
+    score: 0
 }
 
 const player2 = {
-    name: name2,
-    symbol: "O"
+    name: "",
+    symbol: "⭕",
+    score: 0
 }
 
-const game = [[], [], []]
+while (true) {
+    player1.name = prompt("Name Player 1")
+    player2.name = prompt("Name Player 2")
 
-let currentPlayer = player1
-document.getElementById('turn').innerText = currentPlayer.name
+    if (player1.name && player2.name && player1.name !== player2.name) break
+}
+
+const result = document.getElementById('result')
+const turn = document.getElementById('turn')
+const playAgainBtn = document.getElementById('playAgain')
+const boxs = document.getElementsByClassName('box')
+const playerOneName = document.getElementById('playerOneName')
+const playerTwoName = document.getElementById('playerTwoName')
+const playerOneScore = document.getElementById('playerOneScore')
+const playerTwoScore = document.getElementById('playerTwoScore')
+
+const startGame = () => {
+    currentPlayer = player1
+    turn.innerText = currentPlayer.name
+    gameOver = false
+    filledBoxs = 0
+    playerOneName.innerText = player1.name
+    playerTwoName.innerText = player2.name
+    playerOneScore.innerText = player1.score
+    playerTwoScore.innerText = player2.score
+}
+startGame()
 
 const boxClick = (e) => {
-    const win = document.getElementById('win')
-    count++
+    if (gameOver) return
+
+    filledBoxs++
+
     e.innerText = currentPlayer.symbol
+
     game[e.dataset.m][e.dataset.n] = currentPlayer.symbol
+
     currentPlayer == player1 ? currentPlayer = player2 : currentPlayer = player1
-    document.getElementById('turn').innerText = currentPlayer.name
+    turn.innerText = currentPlayer.name
+
     const res = validGame()
-    if (res === "X") {
-        win.innerText = `${player1.name} Won 🎉🎉`
-        setTimeout(() => {
-            window.location.reload()
-        }, 3000)
+
+    if (res === "❌") {
+        result.innerText = `${player1.name} Won 🎉🎉`
+        player1.score = player1.score + 1
+        playerOneScore.innerHTML = player1.score
+        gameOver = true
+        playAgainBtn.style.display = "block"
+    } else if (res === "⭕") {
+        result.innerText = `${player2.name} Won 🎉🎉`
+        player2.score = player2.score + 1
+        playerTwoScore.innerHTML = player2.score
+        gameOver = true
+        playAgainBtn.style.display = "block"
+    } else if (filledBoxs === 9 && res === undefined) {
+        result.innerText = `Draw 😑`
+        gameOver = true
+        playAgainBtn.style.display = "block"
     }
-    if (res === "O") {
-        win.innerText = `${player2.name} Won 🎉🎉`
-        setTimeout(() => {
-            window.location.reload()
-        }, 3000)
+}
+
+const playAgain = () => {
+    filledBoxs = 0
+    currentPlayer = player1
+    turn.innerText = currentPlayer.name
+    result.innerText = ""
+    gameOver = false
+    game = [[], [], []]
+
+    for (let box of boxs) {
+        box.innerText = ""
     }
-    if (count === 9) {
-        win.innerText = `Draw 😑`
-        setTimeout(() => {
-            window.location.reload()
-        }, 3000)
-    }
+
+    playAgainBtn.style.display = "none"
 }
 
 const validGame = () => {

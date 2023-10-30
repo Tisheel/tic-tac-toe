@@ -36,3 +36,11 @@
     justify-content: center;
     align-items: center;
 }
+
+#playAgain {
+    display: none;
+    background: transparent;
+    border: 1px solid;
+    font-size: x-large;
+    cursor: pointer;
+}
