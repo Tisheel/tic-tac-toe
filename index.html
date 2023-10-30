@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <section id="main">
+        <h1>Tic Tac Toe</h1>
+        <section id="board">
+            <section id="board-head">
+                <span>Turn: <span id="turn"></span></span>
+                <span id="win"></span>
+            </section>
+            <table>
+                <tr>
+                    <td>
+                        <div class="box" data-m="0" data-n="0" type="button" onclick="boxClick(this)">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box" data-m="0" data-n="1" type="button" onclick="boxClick(this)">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box" data-m="0" data-n="2" type="button" onclick="boxClick(this)">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="box" data-m="1" data-n="0" type="button" onclick="boxClick(this)">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box" data-m="1" data-n="1" type="button" onclick="boxClick(this)">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box" data-m="1" data-n="2" type="button" onclick="boxClick(this)">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="box" data-m="2" data-n="0" type="button" onclick="boxClick(this)">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box" data-m="2" data-n="1" type="button" onclick="boxClick(this)">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box" data-m="2" data-n="2" type="button" onclick="boxClick(this)">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </section>
+    <script src="index.js"></script>
+</body>
+
+</html>
