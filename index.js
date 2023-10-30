@@ -1,4 +1,5 @@
 let name1, name2
+let count = 0
 
 while (true) {
     name1 = prompt("Name Player 1")
@@ -24,19 +25,27 @@ let currentPlayer = player1
 document.getElementById('turn').innerText = currentPlayer.name
 
 const boxClick = (e) => {
+    const win = document.getElementById('win')
+    count++
     e.innerText = currentPlayer.symbol
     game[e.dataset.m][e.dataset.n] = currentPlayer.symbol
     currentPlayer == player1 ? currentPlayer = player2 : currentPlayer = player1
     document.getElementById('turn').innerText = currentPlayer.name
     const res = validGame()
     if (res === "X") {
-        document.getElementById('win').innerText = `${player1.name} Won 🎉🎉`
+        win.innerText = `${player1.name} Won 🎉🎉`
         setTimeout(() => {
             window.location.reload()
         }, 3000)
     }
     if (res === "O") {
-        document.getElementById('win').innerText = `${player2.name} Won 🎉🎉`
+        win.innerText = `${player2.name} Won 🎉🎉`
+        setTimeout(() => {
+            window.location.reload()
+        }, 3000)
+    }
+    if (count === 9) {
+        win.innerText = `Draw 😑`
         setTimeout(() => {
             window.location.reload()
         }, 3000)
